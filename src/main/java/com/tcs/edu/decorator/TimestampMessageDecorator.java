@@ -9,10 +9,10 @@ import java.time.Instant;
 public class TimestampMessageDecorator {
     /**
      * Формирование строки вида  - текущая дата и время + строка
-     * @param message
+     * @param message Сообщение, которое необходимо добавить к текущей дате и времени
      * @return Склейка текущий даты со временем и строки, полученной извне
      */
     public static String decorator(String message){
-        return Instant.now() + message;
+        return Instant.now() + " " + message;
     }
 }
