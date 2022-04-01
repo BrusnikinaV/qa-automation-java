@@ -12,7 +12,8 @@ public class TimestampMessageDecorator {
      * @param message Сообщение, которое необходимо добавить к текущей дате и времени
      * @return Склейка текущий даты со временем и строки, полученной извне
      */
-    public static String decorator(String message){
-        return Instant.now() + " " + message;
+    public static String decorate(String message){
+        String decoratedMessage = Instant.now() + " " + message;
+        return decoratedMessage;
     }
 }
