@@ -7,12 +7,15 @@ import java.time.Instant;
  * @author Брусникина Варвара
  */
 public class TimestampMessageDecorator {
+    static Integer messageCount = 0;
     /**
      * Формирование строки вида  - текущая дата и время + строка
      * @param message Сообщение, которое необходимо добавить к текущей дате и времени
      * @return Склейка текущий даты со временем и строки, полученной извне
      */
-    public static String decorator(String message){
-        return Instant.now() + " " + message;
+    public static String decorate(String message){
+        messageCount++;
+        final var decoratedMessage =  messageCount + " " + Instant.now() + " " + message;
+        return decoratedMessage;
     }
 }
