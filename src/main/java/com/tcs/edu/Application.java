@@ -2,15 +2,12 @@ package com.tcs.edu;
 
 import com.tcs.edu.decorator.MessageService;
 import com.tcs.edu.decorator.enumDecorator.Severity;
+import com.tcs.edu.printer.ConsolePrinter;
 
 class Application {
     public static void main(String[] args) {
-        System.out.println(MessageService.decorate("Hello world", Severity.MINOR));
-        System.out.println(MessageService.decorate("Hello world", Severity.REGULAR));
-        System.out.println(MessageService.decorate("Hello world", Severity.MAJOR));
-        System.out.println(MessageService.decorate("Hello world", Severity.MINOR));
-        System.out.println(MessageService.decorate("Hello world", Severity.REGULAR));
-        System.out.println(MessageService.decorate("Hello world", Severity.MAJOR));
-
+        MessageService.print(Severity.MINOR, "Hello world!");
+        MessageService.print(Severity.REGULAR, "Hi!", "Hello world", "Hello");
+        MessageService.print(Severity.MAJOR, "Hello");
     }
 }
