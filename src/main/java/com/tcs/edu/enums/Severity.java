@@ -1,4 +1,4 @@
-package com.tcs.edu.decorator.enumDecorator;
+package com.tcs.edu.enums;
 
 /**
  * Enum, пречисляющий уровень важности

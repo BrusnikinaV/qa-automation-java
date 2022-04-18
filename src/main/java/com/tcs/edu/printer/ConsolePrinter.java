@@ -1,8 +1,5 @@
 package com.tcs.edu.printer;
 
-import com.tcs.edu.decorator.MessageService;
-import com.tcs.edu.decorator.enumDecorator.Severity;
-
 /**
  * Класс, предназначенный для описания методов по выводу значений на консоль
  * @author Брусникина Варвара

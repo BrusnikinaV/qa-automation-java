@@ -1,8 +1,7 @@
 package com.tcs.edu;
 
 import com.tcs.edu.decorator.MessageService;
-import com.tcs.edu.decorator.enumDecorator.Severity;
-import com.tcs.edu.printer.ConsolePrinter;
+import com.tcs.edu.enums.Severity;
 
 class Application {
     public static void main(String[] args) {

@@ -1,5 +1,7 @@
 package com.tcs.edu.decorator.enumDecorator;
 
+import com.tcs.edu.enums.Severity;
+
 /**
  * Класс, преобразующий Enum в String
  */

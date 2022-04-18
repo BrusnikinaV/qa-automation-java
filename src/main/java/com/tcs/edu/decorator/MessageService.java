@@ -1,10 +1,7 @@
 package com.tcs.edu.decorator;
 
-import com.tcs.edu.decorator.enumDecorator.Severity;
-import com.tcs.edu.decorator.enumDecorator.SeverityDecorate;
+import com.tcs.edu.enums.Severity;
 import com.tcs.edu.printer.ConsolePrinter;
-
-import java.time.Instant;
 
 /**
  * Класс, описывающий методы получения итоговых строк
