@@ -1,12 +1,12 @@
 package com.tcs.edu;
 
-import com.tcs.edu.decorator.TimestampMessageDecorator;
+import com.tcs.edu.decorator.MessageService;
+import com.tcs.edu.enums.Severity;
 
 class Application {
     public static void main(String[] args) {
-        System.out.println(TimestampMessageDecorator.decorate("Hello world"));
-        System.out.println(TimestampMessageDecorator.decorate("Hello world"));
-        System.out.println(TimestampMessageDecorator.decorate("Hello world"));
-        System.out.println(TimestampMessageDecorator.decorate("Hello world"));
+        MessageService.print(Severity.MINOR, "Hello world!");
+        MessageService.print(Severity.REGULAR, "Hi!", "Hello world", "Hello");
+        MessageService.print(Severity.MAJOR, "Hello");
     }
 }
