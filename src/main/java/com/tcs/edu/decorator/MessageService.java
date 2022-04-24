@@ -17,7 +17,9 @@ public class MessageService {
     public static void print(Severity level, String message, String... messages){
         ConsolePrinter.print(MessageDecorate.decorate(message, level));
         for (String currentMessage:messages){
-            ConsolePrinter.print(MessageDecorate.decorate(currentMessage, level));
+            if (currentMessage != null){
+                ConsolePrinter.print(MessageDecorate.decorate(currentMessage, level));
+            }
         }
     }
 }
