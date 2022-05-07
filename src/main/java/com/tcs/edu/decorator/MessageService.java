@@ -1,5 +1,6 @@
 package com.tcs.edu.decorator;
 
+import com.tcs.edu.domain.Message;
 import com.tcs.edu.enums.Doubling;
 import com.tcs.edu.enums.MessageOrder;
 import com.tcs.edu.enums.Severity;
@@ -19,6 +20,10 @@ public class MessageService {
 
     public static void print(Severity level, String message, String... messages){
         print(level, MessageOrder.ASC, Doubling.DOUBLES, message, messages);
+    }
+
+    public static void print(Message message, String... messages){
+        print(message.getLevel(), MessageOrder.ASC, Doubling.DOUBLES, message.getBody(), messages);
     }
 
     public static void print(Severity level, MessageOrder order, Doubling doubling, String message, String... messages){
