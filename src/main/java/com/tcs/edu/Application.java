@@ -8,15 +8,16 @@ import com.tcs.edu.enums.Severity;
 
 class Application {
     public static void main(String[] args) {
-        MessageService.print(Severity.MINOR, "Hello world!");
-        MessageService.print(Severity.REGULAR, MessageOrder.ASC, Doubling.DOUBLES,
+        MessageService messageService = new MessageService();
+        messageService.print(Severity.MINOR, "Hello world!");
+        messageService.print(Severity.REGULAR, MessageOrder.ASC, Doubling.DOUBLES,
                 "Hi!", "Hello world", "Hello world", "Hello world", "Hello", null);
-        MessageService.print(
+        messageService.print(
                 Severity.MAJOR, MessageOrder.DESC, Doubling.DISTINCT, "Hello",
                 "Hello", "Hello", "Hello", "Hello", "Hi", "abs");
-        MessageService.print(
+        messageService.print(
                 Severity.MAJOR, MessageOrder.ASC, Doubling.DISTINCT, "Hello",
                 "Hello", "Hello", "Hello", "Hello", "Hi", "abs");
-        MessageService.print(new Message(Severity.MAJOR, "Hello beautiful world"), "m1", "m2");
+        messageService.print(new Message(Severity.MAJOR, "Hello beautiful world"), "m1", "m2");
     }
 }

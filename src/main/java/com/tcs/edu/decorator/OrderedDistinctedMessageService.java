@@ -1,8 +1,8 @@
 package com.tcs.edu.decorator;
 
-public class OrderedDistinctedMessageService {
-
-    public static String[] orderedDistinct(String[] messages) {
+public class OrderedDistinctedMessageService implements DecorateMessageService {
+    @Override
+    public String[] decorate(String[] messages) {
         String[] uniqueString = new String[1 + messages.length];
         int k = 0;
         for (String currentMessage:messages){

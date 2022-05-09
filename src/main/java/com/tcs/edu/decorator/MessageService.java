@@ -5,6 +5,7 @@ import com.tcs.edu.enums.Doubling;
 import com.tcs.edu.enums.MessageOrder;
 import com.tcs.edu.enums.Severity;
 import com.tcs.edu.printer.ConsolePrinter;
+import com.tcs.edu.printer.Printer;
 
 /**
  * Класс, описывающий методы получения итоговых строк
@@ -18,15 +19,15 @@ public class MessageService {
      * @param messages Массив строк, каждую из которых необходимо вывести на консоль
      */
 
-    public static void print(Severity level, String message, String... messages){
+    public void print(Severity level, String message, String... messages){
         print(level, MessageOrder.ASC, Doubling.DOUBLES, message, messages);
     }
 
-    public static void print(Message message, String... messages){
+    public void print(Message message, String... messages){
         print(message.getLevel(), MessageOrder.ASC, Doubling.DOUBLES, message.getBody(), messages);
     }
 
-    public static void print(Severity level, MessageOrder order, Doubling doubling, String message, String... messages){
+    public void print(Severity level, MessageOrder order, Doubling doubling, String message, String... messages){
         if (level == null && message == null)
             return;
         String[] strings = new String[1 + messages.length];
@@ -35,14 +36,17 @@ public class MessageService {
             strings[i+1] = messages[i];
         }
         if (doubling.equals(Doubling.DISTINCT)){
-            strings = OrderedDistinctedMessageService.orderedDistinct(strings);
+            DecorateMessageService distincted = new OrderedDistinctedMessageService();
+            strings = distincted.decorate(strings);
         }
         if (order.equals(MessageOrder.DESC)) {
-            strings = DirectionMessageService.orderByDesc(strings);
+            DecorateMessageService decorateMessageService = new DirectionMessageService();
+            strings = decorateMessageService.decorate(strings);
         }
         for (String currentMessage:strings) {
             if (currentMessage != null) {
-                ConsolePrinter.print(MessageDecorate.decorate(currentMessage, level));
+                Printer consolePrinter = new ConsolePrinter();
+                consolePrinter.print(new MessageDecorate().decorate(currentMessage, level));
             }
         }
     }

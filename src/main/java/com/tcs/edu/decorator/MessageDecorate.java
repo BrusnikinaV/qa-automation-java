@@ -17,7 +17,7 @@ public class MessageDecorate {
      * @param message Сообщение, которое необходимо добавить к текущей дате и времени
      * @return Сформированная строка по  шаблону
      */
-    public static String decorate(String message, Severity level){
+    public String decorate(String message, Severity level){
         messageCount++;
         if (messageCount % PAGE_SIZE == 0){
             return String.format(
