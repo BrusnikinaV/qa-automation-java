@@ -26,16 +26,26 @@ public class MessageService {
     Printer consolePrinter = new ConsolePrinter();
 
     public void print(Severity level, String message, String... messages){
-        print(level, MessageOrder.ASC, Doubling.DOUBLES, message, messages);
+        try {
+            print(level, MessageOrder.ASC, Doubling.DOUBLES, message, messages);
+        }
+        catch (IllegalArgumentException e){
+            throw new LogException("Не удалось напечатать сообщение", e);
+        }
     }
 
     public void print(Message message, String... messages){
-        print(message.getLevel(), MessageOrder.ASC, Doubling.DOUBLES, message.getBody(), messages);
+        try {
+            print(message.getLevel(), MessageOrder.ASC, Doubling.DOUBLES, message.getBody(), messages);
+        }
+        catch (IllegalArgumentException e){
+            throw new LogException("Не удалось напечатать сообщение", e);
+        }
+
     }
 
     public void print(Severity level, MessageOrder order, Doubling doubling, String message, String... messages){
-        if (level == null && message == null)
-            return;
+        if (level == null && message == null) throw new IllegalArgumentException("Не передан level или message.");
         String[] strings = new String[1 + messages.length];
         strings[0] = message;
         for (int i=0; i<messages.length; i++){
@@ -48,8 +58,14 @@ public class MessageService {
             strings = decorateMessageService.decorate(strings);
         }
         for (String currentMessage:strings) {
-            if (currentMessage != null) {
-                consolePrinter.print(new PageDecorator().decorate(currentMessage, level));
+            if (currentMessage != null) throw new IllegalArgumentException("Сообщение не передано");
+            {
+                try {
+                    consolePrinter.print(new PageDecorator().decorate(currentMessage, level));
+                }
+                catch (IllegalArgumentException e){
+                    throw new LogException("Не удалось напечатать сообщение", e);
+                }
             }
         }
     }
