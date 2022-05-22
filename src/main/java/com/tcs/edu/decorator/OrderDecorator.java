@@ -1,6 +1,6 @@
 package com.tcs.edu.decorator;
 
-public class DirectionMessageService implements DecorateMessageService{
+public class OrderDecorator implements DecorateMessage {
     @Override
     public String[] decorate(String[] uniqueStrings) {
         String[] descStrings = new String[uniqueStrings.length];

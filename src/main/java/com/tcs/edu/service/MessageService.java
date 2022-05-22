@@ -1,5 +1,8 @@
-package com.tcs.edu.decorator;
+package com.tcs.edu.service;
 
+import com.tcs.edu.decorator.DecorateMessage;
+import com.tcs.edu.decorator.OrderDecorator;
+import com.tcs.edu.decorator.PageDecorator;
 import com.tcs.edu.domain.Message;
 import com.tcs.edu.enums.Doubling;
 import com.tcs.edu.enums.MessageOrder;
@@ -18,6 +21,9 @@ public class MessageService {
      * @param message Строка, которую необходимо вывести на консоль
      * @param messages Массив строк, каждую из которых необходимо вывести на консоль
      */
+    DecorateMessage distincted = new OrderedDistinctedMessage();
+    DecorateMessage decorateMessageService = new OrderDecorator();
+    Printer consolePrinter = new ConsolePrinter();
 
     public void print(Severity level, String message, String... messages){
         print(level, MessageOrder.ASC, Doubling.DOUBLES, message, messages);
@@ -36,17 +42,14 @@ public class MessageService {
             strings[i+1] = messages[i];
         }
         if (doubling.equals(Doubling.DISTINCT)){
-            DecorateMessageService distincted = new OrderedDistinctedMessageService();
             strings = distincted.decorate(strings);
         }
         if (order.equals(MessageOrder.DESC)) {
-            DecorateMessageService decorateMessageService = new DirectionMessageService();
             strings = decorateMessageService.decorate(strings);
         }
         for (String currentMessage:strings) {
             if (currentMessage != null) {
-                Printer consolePrinter = new ConsolePrinter();
-                consolePrinter.print(new MessageDecorate().decorate(currentMessage, level));
+                consolePrinter.print(new PageDecorator().decorate(currentMessage, level));
             }
         }
     }

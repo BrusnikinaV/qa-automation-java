@@ -1,10 +1,12 @@
-package com.tcs.edu.decorator;
+package com.tcs.edu.service;
 
-public class OrderedDistinctedMessageService implements DecorateMessageService {
+import com.tcs.edu.decorator.DecorateMessage;
+
+public class OrderedDistinctedMessage implements DecorateMessage {
     @Override
     public String[] decorate(String[] messages) {
         String[] uniqueString = new String[1 + messages.length];
-        int k = 0;
+        int i = 0;
         for (String currentMessage:messages){
             boolean unique = true;
             if (currentMessage != null){
@@ -15,8 +17,8 @@ public class OrderedDistinctedMessageService implements DecorateMessageService {
                     }
                 }
                 if (unique) {
-                    uniqueString[k] = currentMessage;
-                    k++;
+                    uniqueString[i] = currentMessage;
+                    i++;
                 }
             }
         }

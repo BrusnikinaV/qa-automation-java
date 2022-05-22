@@ -9,7 +9,7 @@ import java.time.Instant;
  * Класс, описывающий методы формирования строк.
  * @author Брусникина Варвара
  */
-public class MessageDecorate {
+public class PageDecorator {
     static Integer messageCount = 0;
     static Integer PAGE_SIZE = 2;
     /**

@@ -1,5 +1,5 @@
 package com.tcs.edu.decorator;
 
-public interface DecorateMessageService {
+public interface DecorateMessage {
     String[] decorate(String[] strings);
 }
