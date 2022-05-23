@@ -10,17 +10,15 @@ public class OrderedDistinctedMessage implements DecorateMessage {
         int i = 0;
         for (String currentMessage:messages){
             boolean unique = true;
-            if (currentMessage != null){
-                for (var currentUniqueString:uniqueString){
-                    if (currentMessage.equals(currentUniqueString)){
-                        unique = false;
-                        break;
-                    }
+            for (var currentUniqueString:uniqueString){
+                if (currentMessage.equals(currentUniqueString)){
+                    unique = false;
+                    break;
                 }
-                if (unique) {
-                    uniqueString[i] = currentMessage;
-                    i++;
-                }
+            }
+            if (unique) {
+                uniqueString[i] = currentMessage;
+                i++;
             }
         }
         return uniqueString;
