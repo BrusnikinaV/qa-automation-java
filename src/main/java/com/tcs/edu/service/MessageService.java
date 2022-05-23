@@ -45,23 +45,21 @@ public class MessageService {
     }
 
     public void print(Severity level, MessageOrder order, Doubling doubling, String message, String... messages){
-        distincted.isArgsValid(level, message, messages);
-        decorateMessageService.isArgsValid(level, message, messages);
-        pageDecorator.isArgsValid(level, message, messages);
         String[] strings = new String[1 + messages.length];
         strings[0] = message;
         for (int i=0; i<messages.length; i++){
             strings[i+1] = messages[i];
         }
         if (doubling.equals(Doubling.DISTINCT)){
+            distincted.isArgsValid(level, message, messages);
             strings = distincted.decorate(strings);
         }
         if (order.equals(MessageOrder.DESC)) {
+            decorateMessageService.isArgsValid(level, message, messages);
             strings = decorateMessageService.decorate(strings);
         }
         for (String currentMessage:strings) {
-            if (currentMessage == null)
-                throw new IllegalArgumentException("currentMessage не может быть null");
+            pageDecorator.isArgsValid(level, message, messages);
             consolePrinter.print(pageDecorator.decorate(currentMessage, level));
         }
     }
