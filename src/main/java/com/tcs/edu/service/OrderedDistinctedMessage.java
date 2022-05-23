@@ -1,6 +1,7 @@
 package com.tcs.edu.service;
 
 import com.tcs.edu.decorator.DecorateMessage;
+import com.tcs.edu.enums.Severity;
 
 public class OrderedDistinctedMessage implements DecorateMessage {
     @Override
@@ -23,5 +24,14 @@ public class OrderedDistinctedMessage implements DecorateMessage {
             }
         }
         return uniqueString;
+    }
+
+    @Override
+    public void isArgsValid(Severity level, String message, String... messages) {
+        if (level == null) throw new IllegalArgumentException("Аргумент level не может быть null");
+        if (message == null) throw new IllegalArgumentException("Не передан message");
+        for (var currentMessage:messages){
+            if (currentMessage == null) throw new IllegalArgumentException("Не передан message");
+        }
     }
 }

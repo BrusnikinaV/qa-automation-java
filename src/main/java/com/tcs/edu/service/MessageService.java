@@ -24,6 +24,7 @@ public class MessageService {
     DecorateMessage distincted = new OrderedDistinctedMessage();
     DecorateMessage decorateMessageService = new OrderDecorator();
     Printer consolePrinter = new ConsolePrinter();
+    PageDecorator pageDecorator = new PageDecorator();
 
     public void print(Severity level, String message, String... messages){
         try {
@@ -41,11 +42,12 @@ public class MessageService {
         catch (IllegalArgumentException e){
             throw new LogException("Не удалось напечатать сообщение", e);
         }
-
     }
 
     public void print(Severity level, MessageOrder order, Doubling doubling, String message, String... messages){
-        if (level == null && message == null) throw new IllegalArgumentException("Не передан level или message.");
+        distincted.isArgsValid(level, message, messages);
+        decorateMessageService.isArgsValid(level, message, messages);
+        pageDecorator.isArgsValid(level, message, messages);
         String[] strings = new String[1 + messages.length];
         strings[0] = message;
         for (int i=0; i<messages.length; i++){
@@ -58,15 +60,9 @@ public class MessageService {
             strings = decorateMessageService.decorate(strings);
         }
         for (String currentMessage:strings) {
-            if (currentMessage != null) throw new IllegalArgumentException("Сообщение не передано");
-            {
-                try {
-                    consolePrinter.print(new PageDecorator().decorate(currentMessage, level));
-                }
-                catch (IllegalArgumentException e){
-                    throw new LogException("Не удалось напечатать сообщение", e);
-                }
-            }
+            if (currentMessage == null)
+                throw new IllegalArgumentException("currentMessage не может быть null");
+            consolePrinter.print(pageDecorator.decorate(currentMessage, level));
         }
     }
 }

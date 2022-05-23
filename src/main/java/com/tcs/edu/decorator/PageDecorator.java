@@ -9,9 +9,9 @@ import java.time.Instant;
  * Класс, описывающий методы формирования строк.
  * @author Брусникина Варвара
  */
-public class PageDecorator {
-    static Integer messageCount = 0;
-    static Integer PAGE_SIZE = 2;
+public class PageDecorator implements DecorateMessage{
+    Integer messageCount = 0;
+    Integer PAGE_SIZE = 2;
     /**
      * Формирование строки вида  - номер строки текущая дата и время + строка + уровень важности
      * @param message Сообщение, которое необходимо добавить к текущей дате и времени
@@ -25,5 +25,16 @@ public class PageDecorator {
         }else{
             return String.format("%d %s %s %s", messageCount, Instant.now(), message, SeverityDecorate.enumToString(level));
         }
+    }
+
+    @Override
+    public String[] decorate(String[] strings) {
+        return new String[0];
+    }
+
+    @Override
+    public void isArgsValid(Severity level, String message, String... messages) {
+        if (level == null) throw new IllegalArgumentException("Аргумент level не может быть null");
+        if (message == null) throw new IllegalArgumentException("Не передан message");
     }
 }
