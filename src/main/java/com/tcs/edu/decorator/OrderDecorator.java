@@ -1,11 +1,12 @@
 package com.tcs.edu.decorator;
 
+import com.tcs.edu.domain.Message;
 import com.tcs.edu.enums.Severity;
 
 public class OrderDecorator implements DecorateMessage {
     @Override
-    public String[] decorate(String[] uniqueStrings) {
-        String[] descStrings = new String[uniqueStrings.length];
+    public Message[] decorate(Message[] uniqueStrings) {
+        Message[] descStrings = new Message[uniqueStrings.length];
         for (int i = uniqueStrings.length -1; i>=0; i--) {
             if (uniqueStrings[i] != null){
                 descStrings[uniqueStrings.length-i -1] = uniqueStrings[i];

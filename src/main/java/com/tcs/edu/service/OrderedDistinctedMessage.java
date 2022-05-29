@@ -1,27 +1,34 @@
 package com.tcs.edu.service;
 
 import com.tcs.edu.decorator.DecorateMessage;
+import com.tcs.edu.domain.Message;
 import com.tcs.edu.enums.Severity;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class OrderedDistinctedMessage implements DecorateMessage {
     @Override
-    public String[] decorate(String[] messages) {
-        String[] uniqueString = new String[1 + messages.length];
+    public Message[] decorate(Message[] messages) {
+        Message[] uniqueTmpMessages = new Message[messages.length];
         int i = 0;
-        for (String currentMessage:messages){
+        for (Message currentMessage:messages){
             boolean unique = true;
-            for (var currentUniqueString:uniqueString){
-                if (currentMessage.equals(currentUniqueString)){
+            for (var currentUniqueString:uniqueTmpMessages){
+                if (currentUniqueString != null && currentMessage.getBody().equals(currentUniqueString.getBody()) &&
+                        currentMessage.getLevel().equals(currentMessage.getLevel())){
                     unique = false;
                     break;
                 }
             }
             if (unique) {
-                uniqueString[i] = currentMessage;
+                uniqueTmpMessages[i] = currentMessage;
                 i++;
             }
         }
-        return uniqueString;
+        Message[] uniqueMessages = new Message[i];
+        System.arraycopy(uniqueTmpMessages, 0, uniqueMessages, 0, i);
+        return uniqueMessages;
     }
 
     @Override

@@ -10,6 +10,8 @@ import com.tcs.edu.enums.Severity;
 import com.tcs.edu.printer.ConsolePrinter;
 import com.tcs.edu.printer.Printer;
 
+import java.util.ArrayList;
+
 /**
  * Класс, описывающий методы получения итоговых строк
  * @author Брусникина Варвара
@@ -50,17 +52,24 @@ public class MessageService {
         for (int i=0; i<messages.length; i++){
             strings[i+1] = messages[i];
         }
+        Message[] messagesArray = new Message[strings.length];
+        int j = 0;
+        for (String currentString:strings){
+            messagesArray[j] = new Message(level, currentString);
+            j++;
+        }
         if (doubling.equals(Doubling.DISTINCT)){
             distincted.isArgsValid(level, message, messages);
-            strings = distincted.decorate(strings);
+            messagesArray = distincted.decorate(messagesArray);
         }
         if (order.equals(MessageOrder.DESC)) {
             decorateMessageService.isArgsValid(level, message, messages);
-            strings = decorateMessageService.decorate(strings);
+            messagesArray = decorateMessageService.decorate(messagesArray);
         }
-        for (String currentMessage:strings) {
-            pageDecorator.isArgsValid(level, message, messages);
-            consolePrinter.print(pageDecorator.decorate(currentMessage, level));
+        messagesArray = pageDecorator.decorate(messagesArray);
+        pageDecorator.isArgsValid(level, message, messages);
+        for (Message currentMessage:messagesArray) {
+            consolePrinter.print(currentMessage.getBody());
         }
     }
 }
