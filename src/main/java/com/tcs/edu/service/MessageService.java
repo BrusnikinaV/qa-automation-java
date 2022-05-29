@@ -7,10 +7,6 @@ import com.tcs.edu.domain.Message;
 import com.tcs.edu.enums.Doubling;
 import com.tcs.edu.enums.MessageOrder;
 import com.tcs.edu.enums.Severity;
-import com.tcs.edu.printer.ConsolePrinter;
-import com.tcs.edu.printer.Printer;
-
-import java.util.ArrayList;
 
 /**
  * Класс, описывающий методы получения итоговых строк
@@ -25,7 +21,7 @@ public class MessageService {
      */
     DecorateMessage distincted = new OrderedDistinctedMessage();
     DecorateMessage decorateMessageService = new OrderDecorator();
-    Printer consolePrinter = new ConsolePrinter();
+    HashMapMessageRepository hashMapMessageRepository = new HashMapMessageRepository();
     PageDecorator pageDecorator = new PageDecorator();
 
     public void print(Severity level, String message, String... messages){
@@ -69,7 +65,7 @@ public class MessageService {
         messagesArray = pageDecorator.decorate(messagesArray);
         pageDecorator.isArgsValid(level, message, messages);
         for (Message currentMessage:messagesArray) {
-            consolePrinter.print(currentMessage.getBody());
+            hashMapMessageRepository.addMessage(currentMessage);
         }
     }
 }

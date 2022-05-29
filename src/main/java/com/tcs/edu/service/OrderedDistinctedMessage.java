@@ -4,9 +4,6 @@ import com.tcs.edu.decorator.DecorateMessage;
 import com.tcs.edu.domain.Message;
 import com.tcs.edu.enums.Severity;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
 public class OrderedDistinctedMessage implements DecorateMessage {
     @Override
     public Message[] decorate(Message[] messages) {
