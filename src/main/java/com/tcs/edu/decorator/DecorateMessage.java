@@ -1,5 +1,7 @@
 package com.tcs.edu.decorator;
 
-public interface DecorateMessage {
+import com.tcs.edu.service.ValidatedService;
+
+public interface DecorateMessage extends ValidatedService {
     String[] decorate(String[] strings);
 }
