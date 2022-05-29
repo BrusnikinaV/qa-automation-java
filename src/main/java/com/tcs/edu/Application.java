@@ -19,5 +19,13 @@ class Application {
                 Severity.MAJOR, MessageOrder.ASC, Doubling.DISTINCT, "Hello",
                 "Hello", "Hello", "Hello", "Hello", "Hi", "abs");
         messageService.print(new Message(Severity.MAJOR, "Hello beautiful world"), "m1", "m2");
+        var messageCollection = messageService.findAll();
+        for (var currentMes:messageCollection){
+            System.out.println(currentMes.getBody());
+        }
+        var filterMessageService = messageService.findBySeverity(Severity.MAJOR);
+        for (var currentMes:filterMessageService){
+            System.out.println(currentMes.getBody());
+        }
     }
 }

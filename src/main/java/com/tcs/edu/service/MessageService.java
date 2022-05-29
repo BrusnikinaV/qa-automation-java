@@ -76,7 +76,11 @@ public class MessageService {
         return hashMapMessageRepository.findByPrimaryKey(key);
     }
 
-    Collection<Message> findAll(){
+    public Collection<Message> findAll(){
         return hashMapMessageRepository.findAll();
+    }
+
+    public Collection<Message> findBySeverity(Severity by){
+        return hashMapMessageRepository.findBySeverity(by);
     }
 }
