@@ -2,9 +2,7 @@ package com.tcs.edu.service;
 
 import com.tcs.edu.domain.Message;
 
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 
 public class HashMapMessageRepository implements MessageRepository{
     HashMap<UUID, Message> hashMap = new HashMap<UUID, Message>();
@@ -22,5 +20,13 @@ public class HashMapMessageRepository implements MessageRepository{
 
     public Message findByPrimaryKey(UUID key){
         return hashMap.get(key);
+    }
+
+    public Collection<Message> findAll() {
+        Collection<Message> messageCollection = new ArrayList<>();
+        for (var currenthashMap:hashMap.entrySet()){
+            messageCollection.add(currenthashMap.getValue());
+        }
+        return messageCollection;
     }
 }

@@ -8,6 +8,7 @@ import com.tcs.edu.enums.Doubling;
 import com.tcs.edu.enums.MessageOrder;
 import com.tcs.edu.enums.Severity;
 
+import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -73,5 +74,9 @@ public class MessageService {
 
     public Message findByPrimaryKey(UUID key){
         return hashMapMessageRepository.findByPrimaryKey(key);
+    }
+
+    Collection<Message> findAll(){
+        return hashMapMessageRepository.findAll();
     }
 }
