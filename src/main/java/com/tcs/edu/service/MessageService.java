@@ -8,6 +8,8 @@ import com.tcs.edu.enums.Doubling;
 import com.tcs.edu.enums.MessageOrder;
 import com.tcs.edu.enums.Severity;
 
+import java.util.UUID;
+
 /**
  * Класс, описывающий методы получения итоговых строк
  * @author Брусникина Варвара
@@ -67,5 +69,9 @@ public class MessageService {
         for (Message currentMessage:messagesArray) {
             hashMapMessageRepository.addMessage(currentMessage);
         }
+    }
+
+    public Message findByPrimaryKey(UUID key){
+        return hashMapMessageRepository.findByPrimaryKey(key);
     }
 }

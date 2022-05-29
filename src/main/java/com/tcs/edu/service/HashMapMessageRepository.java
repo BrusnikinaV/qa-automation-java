@@ -3,6 +3,7 @@ package com.tcs.edu.service;
 import com.tcs.edu.domain.Message;
 
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class HashMapMessageRepository implements MessageRepository{
@@ -17,5 +18,9 @@ public class HashMapMessageRepository implements MessageRepository{
         var id = create(message);
         message.setId(id);
         hashMap.put(id, message);
+    }
+
+    public Message findByPrimaryKey(UUID key){
+        return hashMap.get(key);
     }
 }
