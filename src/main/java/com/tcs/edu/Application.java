@@ -6,6 +6,8 @@ import com.tcs.edu.enums.MessageOrder;
 import com.tcs.edu.enums.Severity;
 import com.tcs.edu.service.MessageService;
 
+import java.util.UUID;
+
 class Application {
     public static void main(String[] args) {
         MessageService messageService = new MessageService();
@@ -20,6 +22,7 @@ class Application {
                 "Hello", "Hello", "Hello", "Hello", "Hi", "abs");
         messageService.print(new Message(Severity.MAJOR, "Hello beautiful world"), "m1", "m2");
         var messageCollection = messageService.findAll();
+        messageService.findByPrimaryKey(messageCollection.stream().findFirst().get().getId());
         for (var currentMes:messageCollection){
             System.out.println(currentMes.getBody());
         }
