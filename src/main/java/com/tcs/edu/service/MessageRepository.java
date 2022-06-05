@@ -6,5 +6,5 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public interface MessageRepository {
-    HashMap<UUID, Message> create(Message message);
+    UUID addMessage(Message message);
 }
