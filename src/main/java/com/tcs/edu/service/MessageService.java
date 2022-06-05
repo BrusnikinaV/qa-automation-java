@@ -68,7 +68,7 @@ public class MessageService {
         messagesArray = pageDecorator.decorate(messagesArray);
         pageDecorator.isArgsValid(level, message, messages);
         for (Message currentMessage:messagesArray) {
-            hashMapMessageRepository.addMessage(currentMessage);
+            hashMapMessageRepository.create(currentMessage);
         }
     }
 

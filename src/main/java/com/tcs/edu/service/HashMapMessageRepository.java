@@ -12,15 +12,11 @@ import java.util.stream.Collectors;
 public class HashMapMessageRepository implements MessageRepository{
     HashMap<UUID, Message> hashMap = new HashMap<UUID, Message>();
 
-    @Override
-    public UUID create(Message message) {
-        return UUID.randomUUID();
-    }
-
-    public void addMessage(Message message){
-        var id = create(message);
+    public HashMap<UUID, Message>  create(Message message){
+        var id = UUID.randomUUID();
         message.setId(id);
         hashMap.put(id, message);
+        return hashMap;
     }
 
     public Message findByPrimaryKey(UUID key){
@@ -28,6 +24,10 @@ public class HashMapMessageRepository implements MessageRepository{
     }
 
     public Collection<Message> findAll() {
+        return hashMap.values();
+    }
+
+    public Collection<Message> findAll(HashMap<UUID, Message> hashMap) {
         return hashMap.values();
     }
 
