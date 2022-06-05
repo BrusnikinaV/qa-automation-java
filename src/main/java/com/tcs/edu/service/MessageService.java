@@ -7,8 +7,9 @@ import com.tcs.edu.domain.Message;
 import com.tcs.edu.enums.Doubling;
 import com.tcs.edu.enums.MessageOrder;
 import com.tcs.edu.enums.Severity;
-import com.tcs.edu.printer.ConsolePrinter;
-import com.tcs.edu.printer.Printer;
+
+import java.util.Collection;
+import java.util.UUID;
 
 /**
  * Класс, описывающий методы получения итоговых строк
@@ -23,7 +24,7 @@ public class MessageService {
      */
     DecorateMessage distincted = new OrderedDistinctedMessage();
     DecorateMessage decorateMessageService = new OrderDecorator();
-    Printer consolePrinter = new ConsolePrinter();
+    HashMapMessageRepository hashMapMessageRepository = new HashMapMessageRepository();
     PageDecorator pageDecorator = new PageDecorator();
 
     public void print(Severity level, String message, String... messages){
@@ -50,17 +51,36 @@ public class MessageService {
         for (int i=0; i<messages.length; i++){
             strings[i+1] = messages[i];
         }
+        Message[] messagesArray = new Message[strings.length];
+        int j = 0;
+        for (String currentString:strings){
+            messagesArray[j] = new Message(level, currentString);
+            j++;
+        }
         if (doubling.equals(Doubling.DISTINCT)){
             distincted.isArgsValid(level, message, messages);
-            strings = distincted.decorate(strings);
+            messagesArray = distincted.decorate(messagesArray);
         }
         if (order.equals(MessageOrder.DESC)) {
             decorateMessageService.isArgsValid(level, message, messages);
-            strings = decorateMessageService.decorate(strings);
+            messagesArray = decorateMessageService.decorate(messagesArray);
         }
-        for (String currentMessage:strings) {
-            pageDecorator.isArgsValid(level, message, messages);
-            consolePrinter.print(pageDecorator.decorate(currentMessage, level));
+        messagesArray = pageDecorator.decorate(messagesArray);
+        pageDecorator.isArgsValid(level, message, messages);
+        for (Message currentMessage:messagesArray) {
+            hashMapMessageRepository.addMessage(currentMessage);
         }
+    }
+
+    public Message findByPrimaryKey(UUID key){
+        return hashMapMessageRepository.findByPrimaryKey(key);
+    }
+
+    public Collection<Message> findAll(){
+        return hashMapMessageRepository.findAll();
+    }
+
+    public Collection<Message> findBySeverity(Severity by){
+        return hashMapMessageRepository.findBySeverity(by);
     }
 }
