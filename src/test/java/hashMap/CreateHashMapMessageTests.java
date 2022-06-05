@@ -22,10 +22,10 @@ public class CreateHashMapMessageTests {
 
     @Test
     void checkAddFewElemntsInHashMap(){
-        HashMap<UUID, Message> messageHashMap = mapMessageRepository.create(new Message(Severity.MAJOR, "Hello beautiful world"));
+        HashMap<UUID, Message> messageHashMap = mapMessageRepository.create(new Message(Severity.MINOR, "Hello beautiful world"));
         assertEquals(1, messageHashMap.size(),
                 "Не совпадает размер HashMap. Ожидали 1 элемент, получили: " + messageHashMap.size());
-        messageHashMap.put(UUID.randomUUID(), new Message(Severity.MINOR, "Hello beautiful life"));
+        messageHashMap.put(UUID.randomUUID(), new Message(Severity.REGULAR, "Hello beautiful life"));
         assertEquals(2, messageHashMap.size(),
                 "Не совпадает размер HashMap. Ожидали 2 элемента, получили: " + messageHashMap.size());
     }
