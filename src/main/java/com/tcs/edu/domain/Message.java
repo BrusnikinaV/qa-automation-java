@@ -11,6 +11,7 @@ public class Message {
     private String body;
 
     public Message( Severity level, String body) {
+        this.id = UUID.randomUUID();
         this.level = level;
         this.body = body;
     }
